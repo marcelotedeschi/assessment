@@ -43,13 +43,17 @@ class NumeralConverter
       2 => 'million',
       3 => 'billion',
       4 => 'trillion',
-      5 => 'quadrillion'
+      5 => 'quadrillion',
+      6 => 'quintillion',
+      7 => 'sextillion',
+      8 => 'septillion',
+      9 => 'octillion',
   }
 
   # Main method for conversion
   def convert
     # variable result contains the final result to display
-    @result = "#{number} in words is: "
+    @result = "#{number} in words is:"
     @numberTemp = number # temporary variable to hold operations
 
     # zero validation
@@ -108,7 +112,7 @@ class NumeralConverter
 
 
     # display converted number on screen
-    puts @result
+    return @result
   end
 
   # method to return thousand, million, billion...
@@ -126,12 +130,14 @@ end
 
 if __FILE__ == $0
 
+  @nc = NumeralConverter.new
+
   puts 'Please type the number you would like to convert: '
   @number = gets.to_i
 
-  @nc = NumeralConverter.new
   @nc.number = @number
-  @nc.convert
+  @result = @nc.convert
 
+  puts @result
 
 end
