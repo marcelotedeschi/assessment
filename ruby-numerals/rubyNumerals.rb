@@ -8,42 +8,6 @@ class NumeralConverter
   end
 
   # Conversion Table (hash with keys)
-  CONV = {
-      0 => 'zero',
-      1 => 'one',
-      2 => 'two',
-      3 => 'three',
-      4 => 'four',
-      5 => 'five',
-      6 => 'six',
-      7 => 'seven',
-      8 => 'eight',
-      9 => 'nine',
-      10 => 'ten',
-      11 => 'eleven',
-      12 => 'twelve',
-      13 => 'thirteen',
-      14 => 'fourteen',
-      15 => 'fifteen',
-      16 => 'sixteen',
-      17 => 'seventeen',
-      18 => 'eighteen',
-      19 => 'nineteen',
-      20 => 'twenty',
-      30 => 'thirty',
-      40 => 'forty',
-      50 => 'fifty',
-      60 => 'sixty',
-      70 => 'seventy',
-      80 => 'eighty',
-      90 => 'ninety',
-      100 => 'hundred',
-      1000 => 'thousand',
-      1000000 => 'million',
-      1000000000 => 'billion',
-      1000000000000 => 'trillion'
-  }
-
   NUMERAL = {
       0 => 'zero',
       1 => 'one',
@@ -66,7 +30,6 @@ class NumeralConverter
       18 => 'eighteen',
       19 => 'nineteen',
   }
-
   TENS = {
       2 => 'twenty',
       3 => 'thirty',
@@ -78,7 +41,7 @@ class NumeralConverter
       9 => 'ninety',
   }
   # millions, billions, trillion, quadrillions,
-  ILLION = {
+  ILLIONS = {
       1 => 'thousand',
       2 => 'million',
       3 => 'billion',
@@ -89,9 +52,17 @@ class NumeralConverter
   # main method for conversion
   def convert
     # variable result contains the final result to display
-    @result = "#{@number} in words is: "
+    @result = '#{@number} in words is: '
     numberTemp = @number # temporary variable to hold operations
 
+    if numberTemp == 0
+      @result += NUMERAL[numberTemp]
+    end
+
+    if numberTemp < 0
+      @result += 'Negative'
+      numberTemp *= -1
+    end
 
     while (numberTemp != 0)
 
@@ -103,30 +74,32 @@ class NumeralConverter
       if(@number2 / 100 != 0)
         @tens = @number2 % 100
         @number2 /= 100
-        @result = @result + ' ' + NUMERAL[@number2].to_s + ' hundred'
+        @result = @result + ' ' + NUMERAL[@number2] + ' hundred'
         @number2 = @tens
       end
       if (@number2 / 10 != 0)
         if (@number2 /10 == 1)
-          @result += ' ' + NUMERAL[@number2].to_s
+          @result += ' ' + NUMERAL[@number2]
         else
           @numeral = @number2 % 10
           @number2 /= 10
-          @result +=  ' ' + TENS[@number2].to_s
+          @result +=  ' ' + TENS[@number2]
           @number2 = @numeral
-          @result += ' ' + NUMERAL[@number2].to_s
+          @result += ' ' + NUMERAL[@number2]
         end
       else
-        @result += ' ' + NUMERAL[@number2].to_s
+        @result += ' ' + NUMERAL[@number2]
       end
 
       if (@count > 0)
-        @result += ' ' + ILLION[@count].to_s
+        @result += ' ' + ILLIONS[@count]
       end
 
       numberTemp %= (1000**@count)
 
     end
+
+    # display converted number on screen
     puts @result
   end
   # method to return trillion, billion, million...
@@ -140,19 +113,15 @@ class NumeralConverter
     return @count
   end
 
-  # display numeral until 20
-  def displayNum
-    @result += CONV[@number]
-  end
-
-
 end
 
 if __FILE__ == $0
 
-  mg = NumeralConverter.new(123456789)
-  mg.convert
+  puts 'Please type the number you would like to convert: '
+  @number = gets.to_i
 
+  @nm = NumeralConverter.new(@number)
+  @nm.convert
 
 
 end
