@@ -22,3 +22,12 @@ For example:
 2001 == two thousand and one
 1999 == nineteen hundred and ninety-nine
 </pre>
+
+Instructions
+--------------------
+1. Navigate to ruby-numerals folder
+2.Run file run.rb
+
+```
+$ ruby run.rb
+```
