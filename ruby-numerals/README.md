@@ -25,7 +25,8 @@ For example:
 
 Instructions
 --------------------
-1. Navigate to ruby-numerals folder
+
+1. Navigate to ruby-numerals folder.
 2.Run file run.rb
 
 ```

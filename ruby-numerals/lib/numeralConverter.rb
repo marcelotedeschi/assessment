@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 class NumeralConverter
   attr_accessor :number
 
@@ -53,7 +52,7 @@ class NumeralConverter
   # Main method for conversion
   def convert
     # variable result contains the final result to display
-    @result = "#{number} in words is:"
+    @result = String.new
     @numberTemp = number # temporary variable to hold operations
 
     # zero validation
@@ -80,7 +79,7 @@ class NumeralConverter
       if(@numTemp / 100 != 0)
         @tens = @numTemp % 100
         @numTemp /= 100
-        @result = @result + ' ' + NUMERAL[@numTemp] + ' hundred'
+        @result = @result + NUMERAL[@numTemp] + ' hundred'
         @numTemp = @tens
       end
       # if we have 2 digits, get the name in NUMERAL or TENS and grab the remaining digit
@@ -94,23 +93,26 @@ class NumeralConverter
           @numTemp /= 10
           @result +=  ' ' + TENS[@numTemp]
           @numTemp = @numeral
-          @result += ' ' + NUMERAL[@numTemp]
+          if (@numTemp != 0)
+            @result += ' ' + NUMERAL[@numTemp]
+          end
         end
       # if the number is 1 digit and not zero
       elsif (@numTemp != 0)
-        @result += ' ' + NUMERAL[@numTemp]
+        @result += NUMERAL[@numTemp]
       end
 
       # when number is equal or greater than 1000 add name in ILLIONS table
       if (@count > 0)
-        @result += ' ' + ILLIONS[@count]
+        @result += ' ' + ILLIONS[@count] + ' '
       end
 
       # get the remaining digits after the first 3
       @numberTemp %= (1000**@count)
     end
 
-
+    #remove blank space
+    #@result[0] = ''
     # display converted number on screen
     return @result
   end
