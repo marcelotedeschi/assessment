@@ -2,11 +2,6 @@
 class NumeralConverter
   attr_accessor :number
 
-  # Create object number
-  def initialize(number = 123456789)
-    @number = number
-  end
-
   # Conversion Table (hash with keys)
   NUMERAL = {
       0 => 'zero',
@@ -30,6 +25,7 @@ class NumeralConverter
       18 => 'eighteen',
       19 => 'nineteen',
   }
+
   TENS = {
       2 => 'twenty',
       3 => 'thirty',
@@ -40,6 +36,7 @@ class NumeralConverter
       8 => 'eighty',
       9 => 'ninety',
   }
+
   # millions, billions, trillion, quadrillions,
   ILLIONS = {
       1 => 'thousand',
@@ -49,60 +46,72 @@ class NumeralConverter
       5 => 'quadrillion'
   }
 
-  # main method for conversion
+  # Main method for conversion
   def convert
     # variable result contains the final result to display
-    @result = '#{@number} in words is: '
-    numberTemp = @number # temporary variable to hold operations
+    @result = "#{number} in words is: "
+    @numberTemp = number # temporary variable to hold operations
 
-    if numberTemp == 0
-      @result += NUMERAL[numberTemp]
+    # zero validation
+    if @numberTemp == 0
+      @result += NUMERAL[@numberTemp]
     end
 
-    if numberTemp < 0
+    # negative validation
+    if @numberTemp < 0
       @result += 'Negative'
-      numberTemp *= -1
+      @numberTemp *= -1
     end
 
-    while (numberTemp != 0)
+    # main loop: each iteration gets the first 3 integers until there are none left
+    while (@numberTemp != 0)
 
-      @count = size(numberTemp)
-      puts @count
+      # count receives the size of the number
+      @count = size(@numberTemp)
 
-      @number2 = numberTemp / (1000**@count)
+      # @numTemp receives the first 3 digits (or 2 or 1 digits)
+      @numTemp = @numberTemp / (1000**@count)
 
-      if(@number2 / 100 != 0)
-        @tens = @number2 % 100
-        @number2 /= 100
-        @result = @result + ' ' + NUMERAL[@number2] + ' hundred'
-        @number2 = @tens
+      # if we have 3 digits get the first's name and grab the remaining 2
+      if(@numTemp / 100 != 0)
+        @tens = @numTemp % 100
+        @numTemp /= 100
+        @result = @result + ' ' + NUMERAL[@numTemp] + ' hundred'
+        @numTemp = @tens
       end
-      if (@number2 / 10 != 0)
-        if (@number2 /10 == 1)
-          @result += ' ' + NUMERAL[@number2]
+      # if we have 2 digits, get the name in NUMERAL or TENS and grab the remaining digit
+      if (@numTemp / 10 != 0)
+        # if we have 2 digit number inside NUMERAL table, get the name
+        if (@numTemp /10 == 1)
+          @result += ' ' + NUMERAL[@numTemp]
+        # else get the first digit name in table TENS then get last digit in table NUMERAL
         else
-          @numeral = @number2 % 10
-          @number2 /= 10
-          @result +=  ' ' + TENS[@number2]
-          @number2 = @numeral
-          @result += ' ' + NUMERAL[@number2]
+          @numeral = @numTemp % 10
+          @numTemp /= 10
+          @result +=  ' ' + TENS[@numTemp]
+          @numTemp = @numeral
+          @result += ' ' + NUMERAL[@numTemp]
         end
-      else
-        @result += ' ' + NUMERAL[@number2]
+      # if the number is 1 digit and not zero
+      elsif (@numTemp != 0)
+        @result += ' ' + NUMERAL[@numTemp]
       end
 
+      # when number is equal or greater than 1000 add name in ILLIONS table
       if (@count > 0)
         @result += ' ' + ILLIONS[@count]
       end
 
-      numberTemp %= (1000**@count)
-
+      # get the remaining digits after the first 3
+      @numberTemp %= (1000**@count)
     end
+
 
     # display converted number on screen
     puts @result
   end
-  # method to return trillion, billion, million...
+
+  # method to return thousand, million, billion...
   def size(numberTemp)
     @count = 0
     loop do
@@ -120,8 +129,9 @@ if __FILE__ == $0
   puts 'Please type the number you would like to convert: '
   @number = gets.to_i
 
-  @nm = NumeralConverter.new(@number)
-  @nm.convert
+  @nc = NumeralConverter.new
+  @nc.number = @number
+  @nc.convert
 
 
 end
