@@ -111,8 +111,6 @@ class NumeralConverter
       @numberTemp %= (1000**@count)
     end
 
-    #remove blank space
-    #@result[0] = ''
     # display converted number on screen
     return @result.chomp(' ')
   end

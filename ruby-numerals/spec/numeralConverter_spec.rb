@@ -8,6 +8,9 @@ describe NumeralConverter do
     @nc = NumeralConverter.new
   end
 
+
+  # validation for main method Convert
+
   it 'converts 1 to one' do
     @nc.number = 1
     expect(@nc.convert).to eq ('one')
@@ -53,6 +56,15 @@ describe NumeralConverter do
     expect(@nc.convert).to eq ('one thousand two hundred ten')
   end
 
+  # validation for method size
 
+  it 'returns 2 for numbers with 7 to 9 digits' do
+    expect(@nc.size(123456789)).to eq (2)
+  end
 
+  # validation for method convert_number
+  it 'returns error with the input is not integer' do
+    expect(@nc.convert_number('f')).to eq ('error')
+    expect(@nc.convert_number('1')).to eq (1)
+  end
 end
