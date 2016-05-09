@@ -18,6 +18,13 @@ describe NumeralConverter do
     expect(@nc.convert).to eq ('zero')
   end
 
+  it 'converts 13 to thirteen' do
+    @nc.number = 13
+    expect(@nc.convert).to eq ('thirteen')
+  end
 
-
+  it 'converts 30 to thirty' do
+    @nc.number = 30
+    expect(@nc.convert).to eq ('thirty')
+  end
 end

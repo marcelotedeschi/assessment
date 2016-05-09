@@ -79,32 +79,32 @@ class NumeralConverter
       if(@numTemp / 100 != 0)
         @tens = @numTemp % 100
         @numTemp /= 100
-        @result = @result + NUMERAL[@numTemp] + ' hundred'
+        @result = @result + NUMERAL[@numTemp] + ' hundred '
         @numTemp = @tens
       end
       # if we have 2 digits, get the name in NUMERAL or TENS and grab the remaining digit
       if (@numTemp / 10 != 0)
         # if we have 2 digit number inside NUMERAL table, get the name
         if (@numTemp /10 == 1)
-          @result += ' ' + NUMERAL[@numTemp]
+          @result += NUMERAL[@numTemp] + ' '
         # else get the first digit name in table TENS then get last digit in table NUMERAL
         else
           @numeral = @numTemp % 10
           @numTemp /= 10
-          @result +=  ' ' + TENS[@numTemp]
+          @result += TENS[@numTemp] + ' '
           @numTemp = @numeral
           if (@numTemp != 0)
-            @result += ' ' + NUMERAL[@numTemp]
+            @result += NUMERAL[@numTemp] + ' '
           end
         end
       # if the number is 1 digit and not zero
       elsif (@numTemp != 0)
-        @result += NUMERAL[@numTemp]
+        @result += NUMERAL[@numTemp] + ' '
       end
 
       # when number is equal or greater than 1000 add name in ILLIONS table
       if (@count > 0)
-        @result += ' ' + ILLIONS[@count] + ' '
+        @result += ILLIONS[@count] + ' '
       end
 
       # get the remaining digits after the first 3
@@ -114,7 +114,7 @@ class NumeralConverter
     #remove blank space
     #@result[0] = ''
     # display converted number on screen
-    return @result
+    return @result.chomp(' ')
   end
 
   # method to return thousand, million, billion...
