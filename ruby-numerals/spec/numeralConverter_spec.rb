@@ -18,6 +18,11 @@ describe NumeralConverter do
     expect(@nc.convert).to eq ('zero')
   end
 
+  it 'converts -2 to negative 2' do
+    @nc.number = -2
+    expect(@nc.convert).to eq ('negative two')
+  end
+
   it 'converts 13 to thirteen' do
     @nc.number = 13
     expect(@nc.convert).to eq ('thirteen')
@@ -27,4 +32,27 @@ describe NumeralConverter do
     @nc.number = 30
     expect(@nc.convert).to eq ('thirty')
   end
+
+  it 'converts 34 to thirty four' do
+    @nc.number = 34
+    expect(@nc.convert).to eq ('thirty four')
+  end
+
+  it 'converts 100 to one hundred' do
+    @nc.number = 100
+    expect(@nc.convert).to eq ('one hundred')
+  end
+
+  it 'converts 121 to one hundred' do
+    @nc.number = 121
+    expect(@nc.convert).to eq ('one hundred twenty one')
+  end
+
+  it 'converts 1210 to one thousand two hundred ten' do
+    @nc.number = 1210
+    expect(@nc.convert).to eq ('one thousand two hundred ten')
+  end
+
+
+
 end

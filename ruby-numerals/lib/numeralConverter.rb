@@ -62,7 +62,7 @@ class NumeralConverter
 
     # negative validation
     if @numberTemp < 0
-      @result += 'Negative'
+      @result += 'negative '
       @numberTemp *= -1
     end
 
