@@ -128,6 +128,7 @@ class NumeralConverter
 
 end
 
+=begin
 if __FILE__ == $0
 
   @nc = NumeralConverter.new
@@ -141,3 +142,5 @@ if __FILE__ == $0
   puts @result
 
 end
+
+=end
