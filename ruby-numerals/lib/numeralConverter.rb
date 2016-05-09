@@ -128,4 +128,13 @@ class NumeralConverter
     return @count
   end
 
+  # method for validating input
+  def convert_number(int)
+    begin
+        return Integer(int)
+    rescue
+        return 'error'
+    end
+  end
+
 end
