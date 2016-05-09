@@ -16,7 +16,7 @@ while (@opt != 0)
 
   puts "\n"
   puts 'Do you want to exit? (0): '
-  @opt = gets
+  @opt = gets.to_i
   puts "\n"
 end
 

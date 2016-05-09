@@ -127,20 +127,3 @@ class NumeralConverter
   end
 
 end
-
-=begin
-if __FILE__ == $0
-
-  @nc = NumeralConverter.new
-
-  puts 'Please type the number you would like to convert: '
-  @number = gets.to_i
-
-  @nc.number = @number
-  @result = @nc.convert
-
-  puts @result
-
-end
-
-=end
