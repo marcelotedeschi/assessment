@@ -27,8 +27,13 @@ Instructions
 --------------------
 
 1. Navigate to ruby-numerals folder.
-2.Run file run.rb
+2. Run bundle install
+3. Run tests
+4. Run file run.rb
+
 
 ```
-$ ruby run.rb
+$ bundle install
+$ rspec spec/numeralConverter_spec.rb
+$ ruby lib/run.rb
 ```
